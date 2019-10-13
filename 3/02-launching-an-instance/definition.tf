@@ -1,4 +1,5 @@
 variable "subnet_id" {}
+variable "ssh_public_key" {}
 
 data "aws_subnet" "selected" {
   id = "${var.subnet_id}"
@@ -54,7 +55,7 @@ resource "aws_eip_association" "eip_assoc" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGeyFZOgWjU2cdWpL3jGcr7QKYU2db8BDLNaS6EpAZvDTOUwSIRjXmbFvxZEPecsXxwzC3wwOeIxEEaE+pMGyi/sFvj8FhblbOahiRolDNtdJPbJ07bKHd9XOfczcSK/z/ocU5sSdPJy3mTuClSgiauwzHGOBeAc/zQi5yeTvkUnJr23gAuMtVleQAoU3dOoa6kh7JG+vwFOkFhgf/8fwsBFYktxKRTjG+6hl8lIduzLwVnznxPLXXeHex8zqHe4Aq47cTsY+/WyY7pQiqnZZXeG7Vaew+PxkyaSEUwianHFMRROm4x7IvuS07Kj6wgqfIHV0g2hlFyPjzCaTji/1p rhnascimento@Renatos-MacBook-Air.local"
+  public_key = "${var.ssh_public_key}"
 }
 
 resource "aws_instance" "web" {
@@ -72,3 +73,4 @@ resource "aws_instance" "web" {
     Name = "www1"
   }
 }
+
